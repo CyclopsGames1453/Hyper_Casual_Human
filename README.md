@@ -3,4 +3,4 @@ Simple hyper casual human controller for unity.
 
 # Updates
 24.04.2023
--Add Animation
+-Add Animations
