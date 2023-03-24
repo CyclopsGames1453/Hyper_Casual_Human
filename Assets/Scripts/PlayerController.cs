@@ -12,6 +12,13 @@ public class PlayerController : MonoBehaviour
     Vector3 startPosition;
     Vector3 endPosition;
 
+    Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     void Update()
     {
         isTouch = false;
@@ -24,6 +31,10 @@ public class PlayerController : MonoBehaviour
         {
             isTouch = true;
         }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            animator.SetBool("isWalk", false);
+        }
 
         if (isTouch)
         {
@@ -31,8 +42,13 @@ public class PlayerController : MonoBehaviour
 
             if (Vector3.Distance(startPosition, endPosition) > 1)
             {
+                animator.SetBool("isWalk", true);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, CalculateRotation(), turnSpeed * Time.deltaTime);
                 transform.position += transform.forward * moveSpeed * Time.deltaTime;
+            }
+            else
+            {
+                animator.SetBool("isWalk", true);
             }
         }
     }
